@@ -12,36 +12,12 @@ void dfs(int now) {
 		result++;
 		return;
 	}
-
-
 	for (int i = 1; i <=3; i++) {
 		int next = now - i;
-
-		if (next < 0) {
-			continue;
-		}
-
+		if (next < 0) continue;
 		dfs(next);
-
-
 	}
-
 }
-void init(){
-
-	result = 0;
-	cnt = 0;
-}
-void input(){
-
-	cin >> N;
-
-}
-void solution(){
-
-	dfs(N);
-}
-
 
 int main() {
 
@@ -50,18 +26,12 @@ int main() {
 
 	for (int tc = 1; tc <= T; tc++) {
 
-		init();
-		input();
-		solution();
+		result = 0;
+		cnt = 0;
+		cin >> N;
+		dfs(N);
 
 		cout <<result<<endl;
 	}
-
-	
-
-	
-
-	
-
 	return 0;
 }
