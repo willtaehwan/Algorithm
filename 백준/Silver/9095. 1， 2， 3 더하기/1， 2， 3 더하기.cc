@@ -3,35 +3,26 @@
 using namespace std;
 
 int N;
-int cnt = 0;
-int result = 0;
 
-void dfs(int now) {
+int DP[12] = { 0, };
 
-	if (now == 0) {
-		result++;
-		return;
-	}
-	for (int i = 1; i <=3; i++) {
-		int next = now - i;
-		if (next < 0) continue;
-		dfs(next);
-	}
-}
 
 int main() {
 
 	int T;
 	cin >> T;
 
+	DP[1] = 1;
+	DP[2] = 2;
+	DP[3] = 4;
+	for (int i = 4; i <= 10; i++) {
+		DP[i] = DP[i - 3] + DP[i - 2] + DP[i - 1];
+	}
+	
 	for (int tc = 1; tc <= T; tc++) {
 
-		result = 0;
-		cnt = 0;
 		cin >> N;
-		dfs(N);
-
-		cout <<result<<endl;
+		cout <<DP[N]<<endl;
 	}
 	return 0;
 }
