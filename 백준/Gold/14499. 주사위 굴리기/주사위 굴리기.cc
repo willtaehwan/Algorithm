@@ -9,44 +9,22 @@ int dice_1[] = {0,3,2,1,0};
 int dr[] = { 0,0,0,-1,1 };
 int dc[] = { 0,1,-1,0,0 };
 
+int nextN[4][5] = {
+	{0,1,5,4,2},
+	{0,1,4,5,3},
+	{5,4,2,3,0},
+	{4,5,2,3,1}
+};
+
 int N, M, x, y, K;
 
 void changeDice(int dir, int changeNum) {
 	int nextDice[6] = { 0, };
-	if (dir == 1) { // 동
-		nextDice[0] = dice[0];
-		nextDice[1] = dice[1];
-		nextDice[2] = dice[5];
-		nextDice[3] = dice[4];
-		nextDice[4] = dice[2];
-		nextDice[5] = changeNum;
-	}
-	else if (dir == 2) { // 서
-		nextDice[0] = dice[0];
-		nextDice[1] = dice[1];
-		nextDice[2] = dice[4];
-		nextDice[3] = dice[5];
-		nextDice[4] = dice[3];
-		nextDice[5] = changeNum;
 
+	for (int i = 0; i < 5; i++) {
+		nextDice[i] = dice[nextN[dir-1][i]];
 	}
-	else if (dir == 3) { // 북
-		nextDice[0] = dice[5];
-		nextDice[1] = dice[4];
-		nextDice[2] = dice[2];
-		nextDice[3] = dice[3];
-		nextDice[4] = dice[0];
-		nextDice[5] = changeNum;
-
-	}
-	else { // 남
-		nextDice[0] = dice[4];
-		nextDice[1] = dice[5];
-		nextDice[2] = dice[2];
-		nextDice[3] = dice[3];
-		nextDice[4] = dice[1];
-		nextDice[5] = changeNum;
-	}
+	nextDice[5] = changeNum;
 
 	for (int i = 0; i < 6; i++) {
 		dice[i] = nextDice[i];
@@ -85,8 +63,20 @@ int main() {
 			map[ner][nec] = temp;
 		}
 		
-		changeDice(dir, temp);
 		
+		
+		int nextDice[6] = { 0, };
+
+		for (int i = 0; i < 5; i++) {
+			nextDice[i] = dice[nextN[dir - 1][i]];
+		}
+		nextDice[5] = temp;
+
+		for (int i = 0; i < 6; i++) {
+			dice[i] = nextDice[i];
+		}
+
+
 		x = ner; y = nec;
 
 		/*cout << y<<"  "<< x <<"  ////";
