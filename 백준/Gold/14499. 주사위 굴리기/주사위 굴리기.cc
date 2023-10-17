@@ -5,7 +5,7 @@ using namespace std;
 int map[21][21] = { 0, };
 int dice[6] = { 0,0,0,0,0,0 }; //[정면, 후면, 좌측, 우측, 상부, 하부]
 int dice_1[] = {0,3,2,1,0};
-
+int nextDice[6] = { 0, };
 int dr[] = { 0,0,0,-1,1 };
 int dc[] = { 0,1,-1,0,0 };
 
@@ -64,8 +64,6 @@ int main() {
 		}
 		
 		
-		
-		int nextDice[6] = { 0, };
 
 		for (int i = 0; i < 5; i++) {
 			nextDice[i] = dice[nextN[dir - 1][i]];
@@ -75,7 +73,6 @@ int main() {
 		for (int i = 0; i < 6; i++) {
 			dice[i] = nextDice[i];
 		}
-
 
 		x = ner; y = nec;
 
