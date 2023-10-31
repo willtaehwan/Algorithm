@@ -9,33 +9,6 @@ struct Node {
 	int noc;
 };
 
-//int map_U[3][3] = { 0, };
-//int map_D[3][3] = {
-//	{1,1,1},
-//	{1,1,1},
-//	{1,1,1}
-//};
-//int map_R[3][3] = {
-//	{2,2,2},
-//	{2,2,2},
-//	{2,2,2}
-//};
-//int map_L[3][3] = {
-//	{3,3,3},
-//	{3,3,3},
-//	{3,3,3}
-//};
-//int map_F[3][3] = {
-//	{4,4,4},
-//	{4,4,4},
-//	{4,4,4}
-//};
-//int map_B[3][3] = {
-//	{5,5,5},
-//	{5,5,5},
-//	{5,5,5}
-//};
-
 int map[6][3][3] = { // U0 D1 R2 L3 F4 B5
 	{{0,0,0},{0,0,0},{0,0,0}},
 	{{1,1,1},{1,1,1},{1,1,1}},
@@ -76,12 +49,9 @@ void init() {
 			}
 		}
 	}
-
 }
 
 void turnCube(int shape, int dir) {
-
-	//int temp_arr[3] = { map[shape][0][0], map[shape][0][1], map[shape][0][2] };
 
 	int temp1 = map[shape][0][0];
 	int temp2 = map[shape][0][1];
@@ -98,12 +68,10 @@ void turnCube(int shape, int dir) {
 		for (int i = 0; i < 3; i++) {
 			int temp = map[turn[shape][0]][nextNode[shape][i][0].nor][nextNode[shape][i][0].noc];
 			for (int j = 0; j < 3; j++) {
-				//map[받을 면][면의 row][면의 col]
 				int nor = nextNode[shape][i][j].nor;
 				int noc = nextNode[shape][i][j].noc;
 				int ner = nextNode[shape][i][j+1].nor;
 				int nec = nextNode[shape][i][j+1].noc;
-				//cout <<turn[shape][j]<<" <-- "<<turn[shape][j+1] << " : " << nor << " " << noc << "  /  " << ner << " " << nec << endl;
 				map[turn[shape][j]][nor][noc] = map[turn[shape][j + 1]][ner][nec];
 			}
 
@@ -118,16 +86,14 @@ void turnCube(int shape, int dir) {
 		map[shape][2][0] = temp1;
 		map[shape][1][0] = temp2;
 
-
 		for (int i = 0; i < 3; i++) {
 			int temp = map[turn[shape][0]][nextNode[shape][i][0].nor][nextNode[shape][i][0].noc];
 			for (int j = 3; j > 0; j--) {
-				//map[받을 면][면의 row][면의 col]
+
 				int nor = nextNode[shape][i][(j+1)%4].nor;
 				int noc = nextNode[shape][i][(j+1)%4].noc;
 				int ner = nextNode[shape][i][j].nor;
 				int nec = nextNode[shape][i][j].noc;
-				//cout << turn[shape][(j+1)%4] << " <-- " << turn[shape][j] << " : " << nor << " " << noc << "  /  " << ner << " " << nec << endl;
 				map[turn[shape][(j+1)%4]][nor][noc] = map[turn[shape][j]][ner][nec];
 			}
 
@@ -136,7 +102,6 @@ void turnCube(int shape, int dir) {
 	}
 
 	return;
-
 }
 
 
@@ -156,9 +121,6 @@ int main() {
 
 			string row;
 			cin >> row;
-			// U(85) D(68) F(70) B(66) L(76) R(82)
-			// +(43) -(45) 
-			//cout << int(row[0]) << "  " << int(row[1]) << endl;
 
 			int dir = 0;
 			if (int(row[1]) == 45) dir = 1;
@@ -174,8 +136,6 @@ int main() {
 			
 			turnCube(shape, dir);
 
-			
-			
 		}
 		
 		for (int j = 0; j < 3; j++) {
@@ -190,10 +150,8 @@ int main() {
 			}
 			cout << endl;
 		}
-		
 	
 	}
-
 
 	return 0;
 }
