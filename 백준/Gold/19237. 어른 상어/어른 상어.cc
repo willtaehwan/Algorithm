@@ -34,28 +34,19 @@ int dc[] = { 0,0,0,-1,1 };
 Node sharkMove(int num) {
 
 	shark nows = Now[num];
-	//cout << " =================== " << nows.row << " " << nows.col<<" ";
-	//cout << nows.dir - 1 << endl;
+
 	for (int i = 0; i < 4; i++) {
 		int ned = nows.nextdr[nows.dir - 1][i];
 		int ner = nows.row + dr[ned];
 		int nec = nows.col + dc[ned];
-		//cout << " empty row,col " << ner << " " << nec << endl;
+
 		if (ner < 0 || nec < 0 || ner >= N || nec >= N) continue;
 		if (map[ner][nec].smell != 0) continue;
-		
-		//cout << "empty " << ner << " " << nec << endl;
+
 
 		Now[num].row = ner;
 		Now[num].col = nec;
 		Now[num].dir = nows.nextdr[nows.dir - 1][i];
-
-		/*map[ner][nec].num = num;
-		map[ner][nec].smell = k;
-		flag = 1;
-		map[nows.row][nows.col].now = 0;
-		map[ner][nec].now = num;
-		*/
 		
 		return { ner,nec,ned };
 	}
@@ -112,30 +103,9 @@ int main() {
 		}
 
 	}
-	//cout << endl;
-
-	/*for (int i = M; i >= 1; i--) {
-		if (Now[i].sur == 0) continue;
-		
-		sharkMove(i);
-	}
-
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
-			cout << map[i][j].num << " ";
-		}
-		cout << endl;
-	}*/
 
 	int cnt = 0;
 	while (cnt<1001) {
-
-		/*for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
-				cout << map[i][j].smell << " ";
-			}
-			cout << endl;
-		}*/
 
 		int checkMap[21][21] = { 0, };
 		
@@ -146,7 +116,6 @@ int main() {
 			int checkNum = checkMap[ans.row][ans.col];
 
 			if (checkNum != 0) {
-				//cout << checkNum << "SHARK DIE" << endl;
 				Now[checkNum].sur = 0;
 			}
 			
@@ -169,14 +138,10 @@ int main() {
 					
 				}
 			}
-			//cout << endl;
+
 		}
 
-		
-
 		cnt++;
-		
-		//cout << "===========================  " << cnt << endl;
 
 		int sl = 0;
 		for (int i = 2; i <= M; i++) {
