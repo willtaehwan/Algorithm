@@ -21,6 +21,9 @@ int dc[] = { 0,1,1,1,0,-1,-1,-1 };
 
 void init() {
 
+	
+
+
 	cin >> N >> M >> K;
 
 	for (int i = 0; i < M; i++) {
@@ -130,6 +133,11 @@ void sumNdiv() {
 }
 
 int main() {
+
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
 
 	init();
 
