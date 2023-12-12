@@ -72,6 +72,10 @@ void windmove(int ner, int nec) {
 
 int main() {
 
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
 	init(); // 값 입력
 
 	int changeDistanceCnt = 0;
