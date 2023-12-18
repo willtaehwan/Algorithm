@@ -26,7 +26,7 @@ void init() {
 	return;
 }
 
-void prin_out() {
+void prin_out() { // 디버깅 용 맵 탐색
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < N; j++) {
 			if (map[i][j] == -2) cout << "# ";
@@ -38,7 +38,7 @@ void prin_out() {
 	cout << endl;
 }
 
-void v_clear() {
+void v_clear() { //visited 배열 초기화
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < N; j++) {
 			visited[i][j] = 0;
@@ -47,11 +47,11 @@ void v_clear() {
 	return;
 }
 
-Node bfs(int row, int col, bool del) {
-	int cnt = 1;
-	int rainCnt = 0;
-	int checkNum = map[row][col];
-	if (del) map[row][col] = -2;
+Node bfs(int row, int col, bool del) { // del = 그룹 제거 시 활성화
+	int cnt = 1; // 그룹 내 블록 개수
+	int rainCnt = 0; // 그룹 내 무지개 블록 개수
+	int checkNum = map[row][col]; // 해당 그룹의 기준 번호 저장
+	if (del) map[row][col] = -2; // 그룹 제거 시 -2로 변환
 	visited[row][col] = 1;
 	queue<Node> q;
 	q.push({ row,col });
@@ -66,9 +66,9 @@ Node bfs(int row, int col, bool del) {
 			if (ner < 0 || nec < 0 || ner >= N || nec >= N) continue;
 			if (visited[ner][nec] != 0) continue;
 			if (map[ner][nec] != checkNum && map[ner][nec] != 0) continue;
-			if (map[ner][nec] == 0) rainCnt++;
+			if (map[ner][nec] == 0) rainCnt++; //무지개 블록 카운팅
 			visited[ner][nec] = 1;
-			cnt++;
+			cnt++; //블록 카운팅
 			if (del) map[ner][nec] = -2;
 			q.push({ ner,nec });
 		}
@@ -78,6 +78,7 @@ Node bfs(int row, int col, bool del) {
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < N; j++) {
 			if (map[i][j] == 0) visited[i][j] = 0;
+			// 무지개 블록은 다음 BFS에서 체크 되도록 초기화
 		}
 	}
 
@@ -86,7 +87,7 @@ Node bfs(int row, int col, bool del) {
 	return { cnt, rainCnt };
 }
 
-void gravity() {
+void gravity() { // 블록 하강
 
 	for (int j = 0; j < N; j++) {
 		int last = N - 1;
@@ -110,7 +111,7 @@ void gravity() {
 	return;
 }
 
-void rotateR() {
+void rotateR() { //2차원 회전 행렬, temp 값 저장 후 재 반환
 
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < N; j++) {
@@ -154,27 +155,24 @@ int main() {
 				if (ans.row < 2) continue;
 				else flag = 1;
 
-				if (bestScore < ans.row) {
+				if (bestScore < ans.row) flag = 2;
+
+				else if (bestScore == ans.row 
+					&& bestRain <= ans.col) flag = 2;
+
+				if (flag == 2) {
 					bestScore = ans.row;
 					bestRain = ans.col;
 					delrow = i;
 					delcol = j;
 				}
-				else if (bestScore == ans.row) {
-					if (bestRain <= ans.col) {
-						bestScore = ans.row;
-						bestRain = ans.col;
-						delrow = i;
-						delcol = j;
-					}
 
-				}
 			}
 		}
 		v_clear();
 		finalScore += bestScore * bestScore;
 		//cout << "bestScore = " << bestScore << endl;
-		if (flag == 1) bfs(delrow, delcol, true);
+		if (flag != 0) bfs(delrow, delcol, true);
 		else break;
 
 		//prin_out();
