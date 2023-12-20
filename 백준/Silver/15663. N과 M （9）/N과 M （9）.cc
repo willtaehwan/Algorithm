@@ -17,7 +17,7 @@ void dfs(int now) {
 			cout << path[i]<<" ";
 			
 		}
-		cout << endl;
+		cout << '\n';
 		return;
 	}
 	int temp = 0;
