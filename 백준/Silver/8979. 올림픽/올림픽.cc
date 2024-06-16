@@ -27,7 +27,7 @@ int main() {
 
 	for (int i = 1; i <= N; i++) {
 		if (m[i].gold > m[K].gold) rank++;
-		else if (m[i].gold == m[i].gold) {
+		else if (m[i].gold == m[K].gold) {
 			if (m[i].silver > m[K].silver) rank++;
 			else if (m[i].silver == m[K].silver) {
 				if (m[i].bronze > m[K].bronze) rank++;
