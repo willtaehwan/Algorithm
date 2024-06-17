@@ -1,9 +1,8 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
+#include<unordered_set>
 using namespace std;
 
-vector<string> name;
+unordered_set<string> name;
 
 int N;
 char g;
@@ -27,11 +26,8 @@ int main() {
 	for (int i = 0; i < N; i++) {
 		string now;
 		cin >> now;
-		name.push_back(now);
+		name.insert(now);
 	}
-
-	sort(name.begin(), name.end());
-	name.erase(unique(name.begin(), name.end()), name.end());
 
 	cout << name.size() / game(g);
 
