@@ -1,11 +1,11 @@
-#include <iostream>
+#include <stdio.h>
 int main(){
 	int N,s,P,p,n,r=1;
-	std::cin>>N>>s>>P;
+	scanf("%d %d %d",&N,&s,&P);
 	for(int i=0;i<N;i++){
-		std::cin>>n;
+		scanf("%d",&n);
 		if(n>s)r++;
 	}
 	if(N==P&&n>=s)r=-1;
-	std::cout<<r;
+	printf("%d",r);
 }
