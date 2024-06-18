@@ -15,7 +15,7 @@ int main() {
 		if (n > score) rank++;
 	}
 
-	if (N == P) if (n >= score)rank = -1;
+	if (N == P && n >= score) rank = -1;
 	cout << rank;
 	
 	return 0;
