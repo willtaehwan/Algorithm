@@ -2,9 +2,6 @@
 
 using namespace std;
 
-// 남 : 받은 번호 배수 변경
-// 여 : 받은 번호 기준 대칭되는 모든 구간 변경
-
 int S, N;
 bool swit[101];
 
@@ -31,7 +28,6 @@ int main() {
 			swit[n] = !swit[n];
 			while (1) {
 				if (n - c < 0 || n + c >= S) break;
-
 				if (swit[n + c] == swit[n - c]) {
 					swit[n + c] = !swit[n + c];
 					swit[n - c] = !swit[n - c];
@@ -40,9 +36,7 @@ int main() {
 				else break;
 			}
 		}
-
 	}
-
 
 	for (int i = 0; i < S; i++) {
 		if (i % 20 == 0 && i != 0) cout << "\n";
