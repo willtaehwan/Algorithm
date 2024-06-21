@@ -1,30 +1,21 @@
 #include <iostream>
-
 using namespace std;
-
 int N, M;
 
 int main() {
-
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 	cin >> N >> M;
-	int max_length = 0;
-	int edge_length = 0;
+	int ml = 0;
 	int prev = 0;
-	for (int i = 0; i < M; i++) {
+	for(int i = 0; i<M;i++){
 		int now;
 		cin >> now;
-		if (now - prev > max_length) {
-			max_length = now - prev;
-			if (i == 0) edge_length = now - prev;
-		}
+		ml = max(ml, (now - prev + 1) / 2);
+		if (i == 0) ml = now;
 		prev = now;
 	}
-
-	if (N - prev > edge_length) edge_length = N - prev;
-
-	
-	if (max_length/2 < edge_length) cout << edge_length;
-	else cout << (max_length / 2) + (max_length % 2) ;
-
+	cout << max(ml, N - prev);
 	return 0;
 }
