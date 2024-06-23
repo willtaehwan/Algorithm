@@ -13,8 +13,8 @@ int main() {
 
 	for (int i = 0; i < N - 1; i++) cin >> dist[i];
 	
-	int tot_cost = 0;
-	int min_cost = 1e9;
+	long long int tot_cost = 0;
+	long long int min_cost = 2e9;
 	for (int i = 0; i < N; i++) {
 		cin >> cost[i];
 		if (min_cost > cost[i]) min_cost = cost[i];
