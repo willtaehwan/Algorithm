@@ -1,12 +1,12 @@
 #include <iostream>
-#include <map>
+#include <unordered_map>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
 
 int N, M;
-map<string, int> m;
+unordered_map<string, int> m;
 
 
 bool comp(pair<string,int>& a, pair<string, int>& b) {
