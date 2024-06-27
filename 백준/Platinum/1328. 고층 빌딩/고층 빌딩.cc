@@ -1,15 +1,27 @@
-#include<bits/stdc++.h>
-#define f(i,l,r) for(int i=l;i<=r;++i)
+#include<iostream>
+#include<algorithm>
+#define MOD_NUM 1000000007;
 using namespace std;
-typedef long long ll;
-const int MOD=1e9+7;
-int N,L,R,s[101][101][101];
 
-int main(){
-    cin>>N>>L>>R;
-    s[1][1][1]=1;
-    f(i,2,N)f(j,1,L)f(k,1,R)
-        s[i][j][k]=((ll)s[i-1][j][k]*(i-2)+s[i-1][j][k-1]+s[i-1][j-1][k])%MOD;
-    cout<<s[N][L][R];
+long long int DP[101][101][101] = { 0, };
+
+int main() {
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+
+    int N, L, R;
+    cin >> N >> L >> R;
+
+    DP[1][1][1] = 1;
+
+    for (int i = 2; i <= N; ++i) {
+        for (int j = 1; j <= min(L,i); ++j) {
+            for (int k = 1; k <= min(R,i); ++k) {
+                DP[i][j][k] = (DP[i - 1][j - 1][k] + DP[i - 1][j][k - 1] + DP[i - 1][j][k] * (i - 2)) % MOD_NUM;
+            }
+        }
+    }
+
+    cout << DP[N][L][R];
+
     return 0;
 }
