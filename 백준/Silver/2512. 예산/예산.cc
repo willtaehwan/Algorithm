@@ -13,7 +13,6 @@ int tot_budget;
 int max_num;
 
 void divide(int now, int rem) {
-	//cout << now << " / " << rem << " = " << now/rem<<'\n';
 	int di_cash = now / rem;
 	int remain = now % rem;
 	int cnt = 0;
@@ -31,13 +30,12 @@ void divide(int now, int rem) {
 		}
 	}
 	max_num += di_cash;
-	//cout << "   " << remain << '\n';
 	if (remain / cnt > 0) divide(remain, cnt);
 
 }
 
 int main() {
-
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	cin >> N;
 
 	for (int i = 0; i < N; i++) {
