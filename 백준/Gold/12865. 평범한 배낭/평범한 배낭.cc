@@ -1,25 +1,25 @@
 #include <iostream>
-#include <algorithm>
+#include <vector>
 using namespace std;
 
 int N, K;
 int w, v;
 
-int DP[101][100010] = { 0, };
-
 int main() {
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
 	cin >> N >> K;
+	vector<int> dp(K + 1, 0);
+	int result = 0;
 
-	for (int i = 1; i <= N; i++) {
+	for (int i = 0; i < N; i++) {
 		cin >> w >> v;
-		for (int j = 1; j <= K; j++) {
-			if (j - w >= 0) DP[i][j] = max(DP[i - 1][j - w] + v, DP[i-1][j]);
-			else DP[i][j] = DP[i - 1][j];
+		for (int j = K; j >= w; j--) {
+			dp[j] = max(dp[j - w] + v, dp[j]);
 		}
 	}
 
-	cout << DP[N][K];
+	cout << dp[K];
 
 	return 0;
 }
