@@ -1,16 +1,15 @@
 #include <iostream>
-#include <vector>
+
 using namespace std;
 
 int N, K;
 int w, v;
 
+int dp[100001] = { 0, };
+
 int main() {
-	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
 	cin >> N >> K;
-	vector<int> dp(K + 1, 0);
-	int result = 0;
 
 	for (int i = 0; i < N; i++) {
 		cin >> w >> v;
