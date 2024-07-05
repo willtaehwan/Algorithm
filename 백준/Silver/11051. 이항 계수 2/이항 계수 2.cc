@@ -6,23 +6,23 @@ int N, K;
 
 int DP[1001][1001] = { 0, };
 
-int ft(int a, int b) {
-	
-	if (a == b || b == 0) return 1;
-
-	if (DP[a][b] != 0) return DP[a][b];
-
-	DP[a][b] = (ft(a - 1, b - 1) + ft(a - 1, b)) % MOD;
-
-	return DP[a][b];
-}
-
 int main() {
 
 	cin >> N >> K;
-	
-	cout << ft(N, K);
 
+	DP[0][0] = 1;
+
+	for (int i = 1; i <=N; i++) {
+		for (int j = 0; j <=K; j++) {
+			if (j == 0) {
+				DP[i][j] = 1;
+				continue;
+			}
+			DP[i][j] = (DP[i - 1][j - 1] + DP[i - 1][j]) % MOD;
+		}
+	}
+
+	cout << DP[N][K];
 
 	return 0;
 }
