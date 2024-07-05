@@ -4,25 +4,20 @@ using namespace std;
 
 int N, K;
 
-int DP[1001][1001] = { 0, };
+int DP[1001] = { 0, };
 
 int main() {
 
 	cin >> N >> K;
 
-	DP[0][0] = 1;
-
-	for (int i = 1; i <=N; i++) {
-		for (int j = 0; j <=K; j++) {
-			if (j == 0) {
-				DP[i][j] = 1;
-				continue;
-			}
-			DP[i][j] = (DP[i - 1][j - 1] + DP[i - 1][j]) % MOD;
+	for (int i = 0; i <=N; i++) {
+		DP[i] = 1;
+		for (int j = i-1; j >0; j--) {
+			DP[j] = (DP[j - 1] + DP[j]) % MOD;
 		}
 	}
 
-	cout << DP[N][K];
+	cout << DP[K];
 
 	return 0;
 }
