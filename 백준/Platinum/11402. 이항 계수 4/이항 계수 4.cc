@@ -4,24 +4,6 @@ using namespace std;
 
 ull N, K;
 int M;
-int cnt = 0;
-int arr_N[40];
-int arr_K[40];
-int MOD[40];
-
-void baseM() {
-
-	ull temp_N = N;
-	ull temp_K = K;
-
-	while (temp_N > 0 || temp_K > 0) {
-		arr_N[cnt] = temp_N % M;
-		arr_K[cnt] = temp_K % M;
-		temp_N /= M;
-		temp_K /= M;
-		cnt++;
-	}
-}
 
 int inverse(int b, int m) {
 
@@ -32,22 +14,11 @@ int inverse(int b, int m) {
 	else return (((temp * temp) % M) * (b % M)) % M;
 }
 
-void binom(int n, int k, int idx) {
+int binom(int n, int k) {
 	
-	if (n < k) {
-		MOD[idx] = 0;
-		return;
-	}
-
-	if (k == 0 || n == k) {
-		MOD[idx] = 1;
-		return;
-	}
-
-	if (k == 1 || n == 1) {
-		MOD[idx] = n;
-		return;
-	}
+	if (n < k) return 0;
+	if (k == 0 || n == k) return 1;
+	if (k == 1 || n == 1) return n;
 
 	if (n - k < k) k = n - k;
 
@@ -56,20 +27,19 @@ void binom(int n, int k, int idx) {
 	for (int i = n; i >= n - k + 1; i--) A = (A * i) % M;
 	for (int i = 1; i <= k; i++) B = (B * i) % M;
 	
-	MOD[idx] = ((A%M) * (inverse(B, M-2)%M)) % M;
+	return (A * inverse(B, M - 2)) % M;
 }
 
 int main() {
 
 	cin >> N >> K >> M;
-
-	baseM();
-	
-	for (int i = 0; i < cnt; i++) binom(arr_N[i], arr_K[i], i);
-
 	int result = 1;
 
-	for (int i = 0; i < cnt; i++) result = (result * MOD[i]) % M;
+	while (N > 0 || K > 0) {
+		result = (result * binom(N % M, K % M)) % M;
+		N /= M;
+		K /= M;
+	}
 
 	cout << result;
 	
