@@ -95,8 +95,9 @@ void shoot(int h, bool dir) {
 		for (int i = 0; i < C; i++) {
 			if (map[R - h][i] == 1) {
 				map[R - h][i] = 0;
-				bfs_ch({ R - h - 1,i });
 				bfs_ch({ R - h, i + 1 });
+				bfs_ch({ R - h - 1,i });
+				
 				bfs_ch({ R - h + 1,i });
 				
 				
@@ -108,8 +109,9 @@ void shoot(int h, bool dir) {
 		for (int i = C - 1; i >= 0; i--) {
 			if (map[R - h][i] == 1) {
 				map[R - h][i] = 0;
-				bfs_ch({ R - h - 1,i });
 				bfs_ch({ R - h, i - 1 });
+				bfs_ch({ R - h - 1,i });
+				
 				bfs_ch({ R - h + 1,i });
 				
 				
