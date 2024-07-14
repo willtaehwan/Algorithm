@@ -23,7 +23,7 @@ ll ans(ll m) {
 }
 
 int main() {
-
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	cin >> P;
 
 	for (int i = 0; i < P; i++) {
