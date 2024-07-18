@@ -9,10 +9,7 @@ struct Node {
 	int cost;
 
 	bool operator<(Node left) const{
-		if (left.cost < cost) return true;
-		else return false;
-
-		return false;
+		return cost > left.cost;
 	}
 };
 
@@ -41,7 +38,7 @@ void bfs(Node st) {
 
 	while (!pq.empty()) {
 		Node now = pq.top(); pq.pop();
-		//cout << now.row << ", " << now.col << ", " << now.cost<<",  " << temp[now.row][now.col]<< '\n';
+
 		if (now.cost > temp[now.row][now.col]) continue;
 		if (temp[c[1].row][c[1].col] <= now.cost) continue;
 
@@ -58,7 +55,7 @@ void bfs(Node st) {
 			if (map[ner][nec] == '*') continue;
 
 			if (temp[ner][nec] < ne_cost) continue;
-			//cout << ner << ", " << nec << '\n';
+
 			temp[ner][nec] = ne_cost;
 			pq.push({ ner,nec,i,ne_cost });
 
@@ -80,15 +77,7 @@ int main() {
 	}
 
 	bfs(c[0]);
-	/*
-	for (int i = 0; i < H; i++) {
-		for (int j = 0; j < W; j++) {
-			cout << temp[i][j] << '\t';
-		}
-		cout << '\n';
-	}
-	cout << '\n';
-	*/
+
 	cout << temp[c[1].row][c[1].col] - 1;
 
 	return 0;
