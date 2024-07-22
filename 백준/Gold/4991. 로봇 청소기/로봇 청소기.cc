@@ -18,7 +18,6 @@ int dp[12][12] = { 0, };
 int cnt = 2;
 
 bool check_arr[12] = { 0, };
-
 int min_result = 1e9; 
 
 
@@ -29,7 +28,6 @@ void dfs(int now, int res, int dep) {
 		return;
 	}
 
-	
 	for (int i = 2; i < cnt; i++) {
 		if (check_arr[i]) continue;
 		if (dp[now][i] == 999) continue;
@@ -37,9 +35,7 @@ void dfs(int now, int res, int dep) {
 		check_arr[i] = true;
 		dfs(i, next, dep + 1);
 		check_arr[i] = false;
-
 	}
-
 }
 
 void near_search(Node st, int num) {
@@ -75,19 +71,13 @@ void near_search(Node st, int num) {
 
 int main() {
 
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
-
-
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
 	while (1) {
 		cin >> w >> h;
-
 		if (w == 0 && h == 0) break;
-		
 		min_result = 1e9;
 		cnt = 2;
-
 
 		for (int i = 0; i < h; i++) {
 			for (int j = 0; j < w; j++) {
@@ -105,19 +95,12 @@ int main() {
 				else map[i][j] = 0;
 			}
 		}
-		int sum = 0;
-
-
-
-		//for (int i = 1; i < cnt; i++) cout << dirty[i].row << " " << dirty[i].col << '\n';
 
 		for(int i = 1; i<cnt;i++) near_search(dirty[i], i);
 
 		check_arr[1] = true;
 		dfs(1, 0, 0);
 		
-
-
 		if (min_result >= 1e9) cout << -1<<'\n';
 		else cout << min_result << '\n';
 
