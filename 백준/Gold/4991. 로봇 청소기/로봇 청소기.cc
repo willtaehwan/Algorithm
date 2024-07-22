@@ -23,6 +23,8 @@ int min_result = 1e9;
 
 void dfs(int now, int res, int dep) {
 
+	if (res > min_result) return;
+
 	if (dep == cnt - 2) {
 		if (min_result > res) min_result = res;
 		return;
