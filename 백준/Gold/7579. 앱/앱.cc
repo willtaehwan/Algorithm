@@ -4,7 +4,7 @@ using namespace std;
 
 int N, M;
 
-int DP[102][10010] = { 0, };
+int DP[10010] = { 0, };
 
 int mem[102] = { 0, };
 int cost[102] = { 0, };
@@ -18,29 +18,16 @@ int main() {
 		cin >> cost[i];
 		full_cost += cost[i];
 	}
-	int min_cost = 1e9;
+	
 	for (int i = 1; i <= N; i++) {
-		for (int j = 0; j <= full_cost; j++) {
-			if (min_cost < j) break;
+		for (int j = full_cost; j >=0; j--) {
+			if (j - cost[i] >= 0) DP[j] = max(DP[j - cost[i]] + mem[i], DP[j]);
 
-			if (j - cost[i] >= 0) DP[i][j] = max(DP[i - 1][j - cost[i]] + mem[i], DP[i - 1][j]);
-			else DP[i][j] = DP[i - 1][j];
-
-			if (DP[i][j] >= M) {
-				min_cost = min(min_cost, j);
-			}
-
+			if (DP[j] >= M) full_cost = min(full_cost, j);
 		}
 	}
-	/*
-	for (int i = 0; i <= N; i++) {
-		for (int j = 0; j <= full_cost; j++) {
-			cout << DP[i][j]<<"\t";
-		}
-		cout << '\n';
-	}
-	*/
-	cout << min_cost;
+	
+	cout << full_cost;
 
 	return 0;
 }
