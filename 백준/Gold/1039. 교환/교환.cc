@@ -1,17 +1,10 @@
 #include <iostream>
 #include <queue>
 #include <set>
-#include <stack>
-#include <algorithm>
 using namespace std;
 
 string N;
 int K;
-
-struct Node {
-	string val;
-	int depth;
-};
 
 int invert(string s) {
 	int sum = 0;
@@ -23,28 +16,23 @@ int invert(string s) {
 }
 
 int main() {
-
+	//ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	cin >> N >> K;
 
 	int num = N.length();
 
-	if (num == 1) {
-		cout << -1 << '\n';
-		return 0;
-	}
-
-	if (num == 2 && N[1] == '0') {
+	if (num == 1 || (num == 2 && N[1] == '0')) {
 		cout << -1 << '\n';
 		return 0;
 	}
 
 	queue<string> q;
-	q.push({ N,0 });
-	
+	q.push(N);
+
 	int max_result = 0;
 	int now_depth = 0;
 	while (!q.empty() && now_depth < K) {
-		
+
 		int Q_size = q.size();
 		set<string> se;
 
@@ -66,7 +54,7 @@ int main() {
 			}
 		}
 		now_depth++;
-		
+
 
 	}
 	if (now_depth != K) cout << -1 << '\n';
