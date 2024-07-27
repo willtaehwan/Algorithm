@@ -7,17 +7,6 @@
 
 using namespace std;
 
-
-struct Node {
-	int next;
-	int cost;
-
-	bool operator<(Node left) const {
-		if (left.cost > cost) return true;
-		else return false;
-	}
-};
-
 int T, n, m, t, s, g, h;
 
 vector<pair<int, int>> map[2010];
@@ -29,21 +18,25 @@ void bfs() {
 
 	for (int i = 1; i <= n; i++) visited[i] = MAX_LEN;
 
-	priority_queue<Node> pq;
-	pq.push({ s, 0 });
+	priority_queue<pair<int,int>> pq;
+	pq.push({ 0, s });
 	visited[s] = 0;
 
 	while (!pq.empty()) {
-		Node now = pq.top(); pq.pop();
+		int now_next = pq.top().second;
+		int now_cost = -pq.top().first;
+		pq.pop();
 
-		for (int i = 0; i < map[now.next].size(); i++) {
-			int next = map[now.next][i].first;
-			int next_cost = now.cost + map[now.next][i].second;
+		if (visited[now_next] < now_cost) continue;
+
+		for (int i = 0; i < map[now_next].size(); i++) {
+			int next = map[now_next][i].first;
+			int next_cost = now_cost + map[now_next][i].second;
 
 			if (visited[next] <= next_cost) continue;
 
 			visited[next] = next_cost;
-			pq.push({ next,next_cost });
+			pq.push({ -next_cost,next });
 		}
 	}
 
