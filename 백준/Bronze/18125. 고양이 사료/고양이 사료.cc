@@ -8,7 +8,7 @@ int map[101][101];
 int tmap[101][101];
 
 int main() {
-
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	cin >> C >> R;
 
 	for (int i = 0; i < R; i++) {
