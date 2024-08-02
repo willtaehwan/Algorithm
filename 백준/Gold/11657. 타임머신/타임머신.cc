@@ -1,5 +1,5 @@
 #include <iostream>
-#define MAX 987654321
+#define MAX 1e9
 using namespace std;
 
 int N, M;
