@@ -15,6 +15,8 @@ int dc[] = { 0,0,-1,1 };
 
 int R, C;
 
+Node Z;
+
 bool chart[4][7] = {
 	{1,0,0,1,1,0,1},
 	{0,1,1,0,1,0,1},
@@ -33,10 +35,13 @@ char chch[16];
 
 void search_block(Node node) {
 
-	int result = 0;
+	// + : 4방이 다 오픈
+	// -, | : 들어온 방향의 반대 방향 오픈
+	// 1 : 
+	int result = 1;
 	for (int i = 0; i < 4; i++) {
 		result = result << 1;
-		
+
 		int ner = node.row + dr[i];
 		int nec = node.col + dc[i];
 		if (ner < 0 || nec < 0 || ner >= R || nec >= C) continue;
@@ -44,13 +49,12 @@ void search_block(Node node) {
 
 		int next = map[ner][nec] - '1';
 		if (chart[i][next]) result += 1;
-		
+
 	}
-	//cout << result<<'\n';
+	result -= 16;
 	if (result == 15) cout << "+";
 	else cout << chch[result];
-	
-	return;
+
 }
 
 void dfs(Node node) {
@@ -60,14 +64,13 @@ void dfs(Node node) {
 	int ned = check[node.dir][now2];
 
 	if (now == '.') {
-		cout << node.row+1 << " " << node.col+1 << ' ';
+		cout << node.row + 1 << " " << node.col + 1 << ' ';
 		search_block(node);
 		return;
 	}
 
-	dfs({ node.row + dr[ned], node.col + dc[ned], ned});
+	dfs({ node.row + dr[ned], node.col + dc[ned], ned });
 
-	return;
 }
 
 int main() {
@@ -81,6 +84,7 @@ int main() {
 		for (int j = 0; j < C; j++) {
 			cin >> map[i][j];
 			if (map[i][j] == 'M') start = { i,j,-1 };
+			if (map[i][j] == 'Z') Z = { i,j,-1 };
 			if (map[i][j] == '|') map[i][j] = '5';
 			if (map[i][j] == '-') map[i][j] = '6';
 			if (map[i][j] == '+') map[i][j] = '7';
@@ -100,24 +104,7 @@ int main() {
 		break;
 	}
 
-	//cout << start.row << ", " << start.col << ", " << start.dir << '\n';
-
 	dfs(start);
-
-	/*
-	for (int i = 0; i < R; i++) {
-		for (int j = 0; j < C; j++) {
-			char now;
-			now = map[i][j];
-			if (now == '1') cout << "┍ ";
-			else if (now == '2') cout << "┗ ";
-			else if (now == '3') cout << "┛ ";
-			else if (now == '4') cout << "┑ ";
-			else cout << map[i][j]<<" ";
-		}
-		cout << '\n';
-	}
-	*/
 
 
 	return 0;
