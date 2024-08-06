@@ -19,15 +19,16 @@ int dist[MAX][105] = { 0, };
 vector<Node> v[105];
 
 int dp(int nowCost, int nowNode) {
-	int& ret = dist[nowCost][nowNode];
+	int ret = dist[nowCost][nowNode];
 	if (ret != -1) return ret;
-	if (nowNode == N) return ret = 0;
+	if (nowNode == N) return 0;
 
 	ret = INF;
 	for (int i = 0; i < v[nowNode].size(); i++) {
 		Node next = v[nowNode][i];
 		if (nowCost >= next.cost) ret = min(ret, dp(nowCost - next.cost, next.end) + next.time);
 	}
+	dist[nowCost][nowNode] = ret;
 	return ret;
 }
 
