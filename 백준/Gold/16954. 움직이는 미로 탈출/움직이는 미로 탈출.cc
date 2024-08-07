@@ -31,18 +31,14 @@ bool bfs(int row, int col) {
 			int ner = now.row + dr[i];
 			int nec = now.col + dc[i];
 			int noc = now.cnt;
-			if (nec < 0 || ner >= 10 || nec >= 8) continue;
+			if (nec < 0 || ner >= 8 || nec >= 8) continue;
 			if (map[ner][nec] == '#') continue;
 			if (map[ner + 1][nec] == '#') continue;
-
-			//cout << ner << ", " << nec << '\n';
 
 			if (i >= 6) noc++;
 			if (i < 3) noc--;
 			q.push({ ner,nec,noc });
 		}
-
-
 	}
 
 	return false;
@@ -58,7 +54,6 @@ int main() {
 	}
 
 	cout<<bfs(7, 0);
-
 
 	return 0;
 }
