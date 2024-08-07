@@ -11,7 +11,7 @@ struct Node {
 int dr[] = { 0, 0, 0,-1,-1,-1,-2,-2,-2 };
 int dc[] = {-1, 0, 1,-1, 0, 1,-1, 0, 1 };
 
-char map[10][8];
+char map[8][8];
 
 bool bfs(int row, int col) {
 
@@ -21,7 +21,7 @@ bool bfs(int row, int col) {
 	while (!q.empty()) {
 		Node now = q.front(); q.pop();
 
-		if (now.row <= 2 ) return true;
+		if (now.row <= 0 ) return true;
 
 		int st = 0;
 		if (now.cnt < 1) st = 3;
@@ -51,13 +51,13 @@ bool bfs(int row, int col) {
 
 int main() {
 
-	for (int i = 2; i < 10; i++) {
+	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
 			cin >> map[i][j];
 		}
 	}
 
-	cout<<bfs(9, 0);
+	cout<<bfs(7, 0);
 
 
 	return 0;
