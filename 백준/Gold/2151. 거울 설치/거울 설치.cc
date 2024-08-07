@@ -1,5 +1,5 @@
 #include <iostream>
-#include <algorithm>
+
 #include <queue>
 #define MAX 3001
 using namespace std;
@@ -40,7 +40,7 @@ int main() {
 
 	int cnt = 0;
 
-	priority_queue<Node> pq;
+	queue<Node> pq;
 
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < N; j++) {
@@ -53,12 +53,8 @@ int main() {
 	for (int i = 0; i < 4; i++) pq.push({ door[0].row, door[0].col, i,0 });
 
 	while (!pq.empty()) {
-		Node now = pq.top(); pq.pop();
+		Node now = pq.front(); pq.pop();
 
-		//if (visited[now.row][now.col] < now.cost) continue;
-		
-
-		//cout << now.row <<", " << now.col << ", " << now.dir << ", " << now.cost << '\n';
 		int k = 0;
 		while (1) {
 			k++;
@@ -70,7 +66,7 @@ int main() {
 			if (map[ner][nec] == '!') {
 				if (visited[ner][nec] < now.cost) continue;
 				visited[ner][nec] = now.cost;
-				//cout << "  " << ner << ", " << nec << '\n';
+
 				pq.push({ ner,nec,nextdir[now.dir][0], now.cost + 1 });
 				pq.push({ ner,nec,nextdir[now.dir][1], now.cost + 1 });
 			}
@@ -82,12 +78,6 @@ int main() {
 			}
 		}
 
-	}
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
-			//cout << visited[i][j] << '\t';
-		}
-		//cout << '\n';
 	}
 
 	cout << visited[door[1].row][door[1].col];
