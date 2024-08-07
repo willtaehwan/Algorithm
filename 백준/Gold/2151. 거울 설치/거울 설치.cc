@@ -9,12 +9,6 @@ struct Node {
 	int col;
 	int dir;
 	int cost;
-
-	bool operator<(Node left) const {
-		if (cost > left.cost) return true;
-		else return false;
-	}
-
 };
 
 int N;
@@ -28,9 +22,6 @@ int nextdir[4][2] = {
 char map[51][51];
 int visited[51][51] = { 0, };
 Node door[2];
-
-int min_cost = 1e9;
-
 
 int main() {
 
