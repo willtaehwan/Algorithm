@@ -36,7 +36,7 @@ void Union(int A, int B) {
 }
 
 int main(){
-
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	cin >> V >> E;
 
 	for (int i = 0; i < E; i++) {
