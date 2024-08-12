@@ -43,7 +43,7 @@ void rec(int idx) {
 }
 
 int main() {
-
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	for (int i = 0; i < 9; i++) {
 		string str;
 		cin >> str;
@@ -54,16 +54,8 @@ int main() {
 			sq[sqn(i, j)][map[i][j]] = 1;
 		}
 	}
-	//cout << '\n';
 
 	rec(0);
-
-	/*for (int i = 0; i < 9; i++) {
-		for (int j = 0; j < 9; j++) {
-			cout << map[i][j];
-		}
-		cout << '\n';
-	}*/
 
 	return 0;
 }
