@@ -5,43 +5,36 @@ using namespace std;
 
 int N, M;
 
-int map[1010][1010] = { 0, };
+int map[2][1010] = { 0, };
 
 int max_result = 0;
 void check(int row, int col) {
 
 	if (!map[row][col]) return;
-	//cout << row << " " << col << "  /  ";
-	int temp1 = (int)sqrt(map[row - 1][col - 1]);
+	int temp1 = (int)sqrt(map[!row][col - 1]);
 	int temp2 = (int)sqrt(map[row][col - 1]);
-	int temp3 = (int)sqrt(map[row - 1][col]);
+	int temp3 = (int)sqrt(map[!row][col]);
 	
 	int cnt = min(temp1, min(temp2,temp3)) + 1;
 	
 	map[row][col] = cnt * cnt;
 	
 	max_result = max(max_result, map[row][col]);
-	//cout << max_result << "\n";
+
 }
 
 int main() {
+
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	cin >> N >> M;
 
-	for (int i = 1; i <= N; i++) {
+	for (int i = 0; i < N; i++) {
 		string str;
 		cin >> str;
 		for (int j = 1; j <= M; j++) {
-			map[i][j] = str[j-1] - '0';
+			map[i%2][j] = str[j-1] - '0';
+			check(i%2, j);
 		}
-	}
-
-	for (int i = 1; i <= N; i++) {
-		for (int j = 1; j <= M; j++) {
-			check(i, j);
-			//cout << saved[i][j] << " ";
-		}
-		//cout << '\n';
 	}
 
 	cout << max_result;
