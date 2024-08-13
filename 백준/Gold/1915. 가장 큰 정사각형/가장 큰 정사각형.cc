@@ -1,6 +1,5 @@
 #include <iostream>
 #include<algorithm>
-#include<math.h>
 using namespace std;
 
 int N, M;
@@ -9,22 +8,12 @@ int map[2][1010] = { 0, };
 
 int max_result = 0;
 void check(int row, int col) {
-
 	if (!map[row][col]) return;
-	int temp1 = (int)sqrt(map[!row][col - 1]);
-	int temp2 = (int)sqrt(map[row][col - 1]);
-	int temp3 = (int)sqrt(map[!row][col]);
-	
-	int cnt = min(temp1, min(temp2,temp3)) + 1;
-	
-	map[row][col] = cnt * cnt;
-	
+	map[row][col] = min({ map[!row][col - 1], map[row][col - 1], map[!row][col] }) + 1;
 	max_result = max(max_result, map[row][col]);
-
 }
 
 int main() {
-
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	cin >> N >> M;
 
@@ -37,7 +26,7 @@ int main() {
 		}
 	}
 
-	cout << max_result;
+	cout << max_result * max_result;
 
 	return 0;
 }
