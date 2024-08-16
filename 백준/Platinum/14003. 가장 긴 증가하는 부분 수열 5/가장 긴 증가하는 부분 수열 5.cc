@@ -14,7 +14,7 @@ vector<Node> v;
 Node arr[1000002];
 
 void search_bi(int now, int idx) {
-	
+
 	int left = 1;
 	int right = v.size() - 1;
 	int mid = (left + right) / 2;
@@ -40,13 +40,6 @@ int main() {
 		cin >> now;
 		now += 1e9 + 1;
 		arr[i].num = now;
-		/*if (i == 9) {
-			for (int i = 0; i < v.size(); i++) cout << v[i].num - 1e9 - 1<< "\t";
-			cout << '\n';
-			for (int i = 0; i < v.size(); i++) cout << v[i].idx << "\t";
-			cout << '\n';
-			cout << "=================\n";
-		}*/
 
 		if (v[end].num > now) search_bi(now, i);
 		if (v[end].num < now) {
@@ -56,28 +49,15 @@ int main() {
 		}
 	}
 
-	/*for (int i = 1; i <= N; i++) cout << i << "\t";
-	cout << '\n';
-	for (int i = 1; i <= N; i++) cout << arr[i].num - 1e9 -1<< "\t";
-	cout << '\n';
-	for (int i = 1; i <= N; i++) cout << arr[i].idx << "\t";
-	cout << '\n';*/
-
-	cout << v.size() - 1<<'\n';
-
-	/*for (int i = 1; i < v.size(); i++) cout << v[i].num - 1e9 - 1<< " ";
-	cout << '\n';
-	for (int i = 1; i < v.size(); i++) cout << v[i].idx << " ";*/
+	cout << v.size() - 1 << '\n';
 
 	int out_idx = v[end].idx;
 	stack<int> s;
 	while (1) {
-		//cout << arr[out_idx].num - 1e9 - 1 << " ";
 		s.push(arr[out_idx].num - 1e9 - 1);
 		out_idx = arr[out_idx].idx;
 		if (out_idx == 0) break;
 	}
-	//cout << '\n';
 	while (!s.empty()) {
 		int now = s.top(); s.pop();
 		cout << now << " ";
