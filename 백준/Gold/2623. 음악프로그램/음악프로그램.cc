@@ -49,7 +49,7 @@ int main() {
 	}
 	
 	for (int i = 1; i <= N; i++) {
-		if (!check[i]) {
+		if (arr[i]) {
 			cout << 0;
 			return 0;
 		}
