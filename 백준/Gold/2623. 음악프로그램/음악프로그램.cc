@@ -6,7 +6,7 @@ using namespace std;
 int N, M;
 
 int arr[1002];
-bool check[1002];
+
 vector<int> v[1002];
 queue<int> q;
 queue<int> result;
@@ -29,17 +29,13 @@ int main() {
 
 	}
 
-	//for (int i = 0; i <= N; i++) cout << arr[i] << " ";
-
 	for (int i = 1; i <= N; i++) {
 		if (arr[i] == 0) q.push(i);
 	}
 
 	while (!q.empty()) {
 		int now = q.front(); q.pop();
-
 		result.push(now);
-		check[now] = true;
 
 		for (int i = 0; i < v[now].size(); i++) {
 			int next = v[now][i];
@@ -54,15 +50,11 @@ int main() {
 			return 0;
 		}
 	}
-
-
 	
 	while (!result.empty()) {
 		int now = result.front(); result.pop();
 		cout << now << "\n";
 	}
 	
-
-
 	return 0;
 }
