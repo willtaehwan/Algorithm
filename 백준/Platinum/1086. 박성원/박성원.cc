@@ -4,8 +4,8 @@ using namespace std;
 
 int N, K;
 
-int map[15][750]; // i번째 숫자가 K자리부터 시작할 때 나머지
-ll arr[100][32768]; // [확인한 숫자 상태 표시][현재 나머지] 일 때 가능한 경우의 수
+int map[15][750];
+ll DP[100][32768];
 
 string str[15];
 
@@ -20,29 +20,21 @@ int modulo(int idx) {
 	return res;
 }
 
-ll dp(int mod, int stat) {
+ll dp(int mod, int stat, int now_len) {
 	
-	if (stat == (1 << N) - 1) {
-		if (mod == 0) return 1;
-		else return 0;
-	}
+	if (stat == (1 << N) - 1) return mod ? 0 : 1;
 
-	if (arr[mod][stat] != -1) return arr[mod][stat];
-
-	int now_len = max_length;
-	for (int i = 0; i < N; i++) {
-		if (stat & (1 << i)) now_len -= str[i].size();
-	}
+	if (DP[mod][stat] != -1) return DP[mod][stat];
 
 	ll result = 0;
 	for (int i = 0; i < N; i++) {
 		if (stat & (1 << i)) continue;
 		int next_st = stat + (1 << i);
 		int next_mod = (mod + map[i][now_len]) % K;
-		result += dp(next_mod ,next_st);
+		result += dp(next_mod ,next_st, now_len - str[i].size());
 	}
-	arr[mod][stat] = result;
-	return arr[mod][stat];
+	DP[mod][stat] = result;
+	return DP[mod][stat];
 }
 
 ll gcd(ll a, ll b){
@@ -51,6 +43,8 @@ ll gcd(ll a, ll b){
 
 int main() {
 
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+
 	cin >> N;
 	ll q = 1;
 	for (int i = 2; i <= N; i++) q *= i;
@@ -58,21 +52,20 @@ int main() {
 	for (int i = 0; i < N; i++) {
 		cin >> str[i];
 		max_length += str[i].size();
-	
 	}
 	max_length--;
 	
 	cin >> K;
 
 	for (int i = 0; i < N; i++) fill_n(map[i], size(map[i]), -1);
-	for (int i = 0; i < K; i++) fill_n(arr[i], size(arr[i]), -1);
+	for (int i = 0; i < K; i++) fill_n(DP[i], size(DP[i]), -1);
 
 	for (int i = 0; i < N; i++) {
 		int s = str[i].size();
 		map[i][s-1] = modulo(i);
 		for (int j = s; j <= max_length; j++) map[i][j] = (map[i][j - 1] * 10) % K;
 	}
-	ll p = dp(0, 0);
+	ll p = dp(0, 0, max_length);
 	ll g = gcd(q, p);
 	cout<<p/g<<"/"<<q/g;
 	
