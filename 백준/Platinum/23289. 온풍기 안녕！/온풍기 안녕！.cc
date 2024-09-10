@@ -166,6 +166,8 @@ bool search_k() {
 
 int main() {
 
+	ios_base::sync_with_stdio(false); cin.tie(NULL);
+
 	cin >> N >> M >> K;
 
 	for (int i = 0; i < N; i++) {
@@ -194,15 +196,6 @@ int main() {
 		if (search_k()) break;
 
 	}
-
-	/*for (int i = 0; i < N; i++) {
-		for (int j = 0; j < M; j++) {
-			cout << tem[i][j] << " ";
-		}
-		cout << '\n';
-	}
-	cout << '\n';*/
-
 
 	cout << choco;
 
