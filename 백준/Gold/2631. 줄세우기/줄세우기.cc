@@ -4,16 +4,13 @@ using namespace std;
 
 int N;
 int arr[202];
-int len[202];
+int len[202] = { 0, };
 
 int main() {
 
 	cin >> N;
 
-	for (int i = 1; i <= N; i++) {
-		cin >> arr[i];
-		len[i] = 0;
-	}
+	for (int i = 1; i <= N; i++) cin >> arr[i];
 
 	int result = 0;
 	for (int i = 1; i <= N; i++) {
