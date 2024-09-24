@@ -19,32 +19,19 @@ bool map[102][102];
 int visited[102][102];
 int dir[102][102];
 
-void map_reset() {
-	for (int i = 0; i <= N; i++) {
-		for (int j = 0; j <= M; j++) {
-			map[i][j] = 0;
-		}
-	}
-
-	for (int i = 0; i < 4; i++) {
-		int row = dot[i].row;
-		int col = dot[i].col;
-		map[row][col] = true;
-	}
-
-}
-
 int bfs(int a, bool ty) {
 	int d = a * 2;
 	int sr = dot[d].row;
 	int sc = dot[d].col;
 	int er = dot[d + 1].row;
 	int ec = dot[d + 1].col;
+
 	for (int i = 0; i <= N; i++) {
 		for (int j = 0; j <= M; j++) {
 			visited[i][j] = INF;
 		}
 	}
+
 	map[er][ec] = false;
 	queue<Node> q;
 	q.push(dot[d]);
@@ -71,8 +58,6 @@ int bfs(int a, bool ty) {
 		}
 	}
 	
-	//cout << visited[er][ec] << "\n";
-
 	if (ty == 0) {
 		int endr = er;
 		int endc = ec;
@@ -83,21 +68,6 @@ int bfs(int a, bool ty) {
 			endr = endr + dr[ned];
 			endc = endc + dc[ned];
 		}
-
-		/*for (int i = 0; i <= N; i++) {
-			for (int j = 0; j <= M; j++) {
-				cout << map[i][j]<<" ";
-			}
-			cout << '\n';
-		}
-		cout << '\n';
-		for (int i = 0; i <= N; i++) {
-			for (int j = 0; j <= M; j++) {
-				cout << dir[i][j] << " ";
-			}
-			cout << '\n';
-		}
-		cout << '\n';*/
 	}
 
 
@@ -106,13 +76,21 @@ int bfs(int a, bool ty) {
 }
 
 int search(int a) {
-	int d = a * 2;
 
-	map_reset();
+	for (int i = 0; i <= N; i++) {
+		for (int j = 0; j <= M; j++) {
+			map[i][j] = 0;
+		}
+	}
+
+	for (int i = 0; i < 4; i++) {
+		int row = dot[i].row;
+		int col = dot[i].col;
+		map[row][col] = true;
+	}
 
 	int first = bfs(a, 0);
 	int second = bfs((a + 1) % 2, 1);
-	//cout << first << " ,,  ,, " << second << '\n';
 	return first + second;
 }
 
@@ -128,7 +106,6 @@ int main() {
 	int result1, result2;
 
 	result1 = search(0);
-	//cout << "=====================================\n";
 	result2 = search(1);
 
 	if (result1 > result2) swap(result1, result2);
