@@ -36,11 +36,9 @@ int bfs(int a, bool ty) {
 	queue<Node> q;
 	q.push(dot[d]);
 	visited[sr][sc] = 0;
-	bool flag = false;
+
 	while (!q.empty()) {
 		Node now = q.front(); q.pop();
-
-		if (now.row == er && now.col == ec) break;
 
 		for (int i = 0; i < 4; i++) {
 			int ner = now.row + dr[i];
