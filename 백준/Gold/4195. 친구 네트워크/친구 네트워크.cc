@@ -52,10 +52,9 @@ int main() {
 			int b = um[str2];
 
 			Union(a, b);
-
 			cout << num[Find(a)] << "\n";
 		}
-		//for (auto it : um) cout << it.first << " : " << it.second << '\n';
+
 	}
 	return 0;
 }
