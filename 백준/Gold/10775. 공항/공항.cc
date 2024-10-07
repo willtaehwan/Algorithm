@@ -9,15 +9,10 @@ int Find(int n) {
 	else return gate[n] = Find(gate[n]);
 }
 
-bool check(int n) {
+int check(int n) {
 	int next = Find(n);
-	if (next == 0) return false;
-	else {
-		int ne = Find(next - 1);
-		gate[n] = ne;
-		gate[next] = ne;
-		return true;
-	}
+	gate[next] = next - 1;
+	return next;
 }
 
 int main() {
