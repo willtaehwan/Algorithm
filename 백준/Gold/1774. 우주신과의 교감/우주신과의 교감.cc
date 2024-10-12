@@ -1,17 +1,16 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
-#define ll long long
 
 using namespace std;
 
 struct Node {
-	ll row;
-	ll col;
+	int row;
+	int col;
 };
 
 struct Edge {
-	ll cost;
+	double cost;
 	int a;
 	int b;
 
@@ -42,7 +41,7 @@ void Union(int a, int b) {
 }
 
 int main() {
-	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+	ios_base::sync_with_stdio(false); cin.tie(NULL);
 	cin >> N >> M;
 
 	for (int i = 1; i <= N; i++) cin >> node[i].row >> node[i].col;
@@ -55,9 +54,7 @@ int main() {
 	int cnt = 0;
 	for (int i = 1; i <= N; i++) {
 		for (int j = i + 1; j <= N; j++) {
-			ll a = node[i].row - node[j].row;
-			ll b = node[i].col - node[j].col;
-			ll ans = (ll)pow(a, 2) + (ll)pow(b, 2);
+			double ans = sqrt(pow(node[i].row - node[j].row, 2) + pow(node[i].col - node[j].col, 2));
 			edge[cnt++] = { ans,i,j };
 		}
 	}
@@ -70,7 +67,7 @@ int main() {
 
 		if (Find(now.a) == Find(now.b)) continue;
 		Union(now.a, now.b);
-		result += sqrt(now.cost);
+		result += now.cost;
 		//cout << now.cost << " , " << now.a << ", " << now.b << '\n';
 	}
 	cout << fixed;
