@@ -1,15 +1,8 @@
 #include <iostream>
 #include <algorithm>
-#include <queue>
 #include <vector>
 
 using namespace std;
-
-struct Node {
-	int x;
-	int y;
-	int z;
-};
 
 struct Node2 {
 	int v;
@@ -34,13 +27,10 @@ struct Edge {
 
 int N;
 
-Node node[100001];
+
 vector<Node2> v[3];
-
 Edge edge[300060];
-
 int par[100001];
-
 
 int Find(int a) {
 	if (par[a] == a) return a;
@@ -50,9 +40,7 @@ int Find(int a) {
 void Union(int a, int b) {
 	int rootA = Find(a);
 	int rootB = Find(b);
-
 	if (rootA == rootB) return;
-
 	par[rootB] = rootA;
 }
 
@@ -86,14 +74,12 @@ int main() {
 	int result = 0;
 	for (int i = 0; i < cnt; i++) {
 		Edge now = edge[i];
-		
 		if (Find(now.a) == Find(now.b)) continue;
 		Union(now.a, now.b);
 		result += now.cost;
 	}
 
 	cout << result;
-
 
 	return 0;
 }
