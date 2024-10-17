@@ -22,6 +22,8 @@ bool map[1002][1002];
 
 int visited[1002][1002][11] = { 0, };
 
+int result = INF;
+bool flag = false;
 void bfs() {
 
 	for (int i = 0; i < N; i++) {
@@ -38,6 +40,12 @@ void bfs() {
 
 	while (!q.empty()) {
 		Node now = q.front(); q.pop();
+
+		if (now.row == N - 1 && now.col == M - 1) {
+			result = min(result,now.cost);
+			flag = true;
+			continue;
+		}
 
 		if (visited[now.row][now.col][now.boom] < now.cost) continue;
 
@@ -57,9 +65,7 @@ void bfs() {
 			}
 			if (neb < 0) continue;
 			if (visited[ner][nec][neb] <= nect) continue;
-
 			visited[ner][nec][neb] = nect;
-
 			q.push({ ner, nec, net, nect, neb });
 		}
 	}
@@ -81,10 +87,8 @@ int main() {
 
 	bfs();
 
-	int result = INF;
-	for (int i = 0; i <= K; i++) result = min(result, visited[N - 1][M - 1][i]);
-	if (result == INF) cout << -1;
-	else cout << result + 1;
+	if (flag) cout << result + 1;
+	else cout << -1;
 
 	return 0;
 }
