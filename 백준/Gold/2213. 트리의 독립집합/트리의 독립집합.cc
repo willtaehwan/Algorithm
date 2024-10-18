@@ -6,7 +6,7 @@ using namespace std;
 int N;
 
 int w[10002];
-bool visited[10002] = { 0, };
+
 int DP[10002][2] = { 0, };
 
 
@@ -62,8 +62,8 @@ int main() {
 	v[0].push_back(1);
 
 	int result = dp(0, 1, 0);
-	cout << result<<'\n';
-	
+	cout << result << '\n';
+
 	dp2(0, 1, 0);
 	sort(res.begin(), res.end());
 	for (int i = 0; i < res.size(); i++) cout << res[i] << " ";
