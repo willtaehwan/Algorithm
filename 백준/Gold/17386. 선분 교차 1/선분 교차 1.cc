@@ -21,8 +21,8 @@ int main() {
 	bool flag = true;
 	for (int i = 0; i < 4; i++) cin >> p[i].x >> p[i].y;
 
-	if (ccw(0, 1, 2) * ccw(0, 1, 3) >= 0) flag = false;
-	if (ccw(2, 3, 0) * ccw(2, 3, 1) >= 0) flag = false;
+	if (ccw(0, 1, 2) * ccw(0, 1, 3) > 0) flag = false;
+	if (ccw(2, 3, 0) * ccw(2, 3, 1) > 0) flag = false;
 
 	if (flag) cout << 1;
 	else cout << 0;
