@@ -24,7 +24,7 @@ int DP(int s, int e) {
 		}
 	}
 	int result = 0;
-	for (int i = max(s,2); i <= e; i++) result = (result + dp[N][i]) % INF;
+	for (int i = 2; i <= e; i++) result = (result + dp[N][i]) % INF;
 	return result;
 }
 
