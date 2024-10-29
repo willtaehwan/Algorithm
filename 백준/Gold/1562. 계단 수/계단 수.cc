@@ -13,18 +13,18 @@ int DP(int s, int e) {
 		}
 	}
 
-	for (int i = s; i <= e; i++) dp[1][i] = 1;
+	for (int i = s; i <= e; i++) dp[0][i] = 1;
 
-	for (int i = 2; i <= N; i++) {
+	for (int i = 1; i <= N; i++) {
 		for (int j = s; j <= e; j++) {
-			dp[i][j] = (dp[i - 1][j - 1] + dp[i - 1][j + 1]) % INF;
-			//if (j > s) dp[i][j] += dp[i - 1][j - 1];
-			//if (j < e) dp[i][j] += dp[i - 1][j + 1];
-			//dp[i][j] %= INF;
+			//dp[i][j] = (dp[i - 1][j - 1] + dp[i - 1][j + 1]) % INF;
+			if (j > s) dp[i][j] += dp[i - 1][j - 1];
+			if (j < e) dp[i][j] += dp[i - 1][j + 1];
+			dp[i][j] %= INF;
 		}
 	}
 	int result = 0;
-	for (int i = 2; i <= e; i++) result = (result + dp[N][i]) % INF;
+	for (int i = 2; i <= e; i++) result = (result + dp[N-1][i]) % INF;
 	return result;
 }
 
