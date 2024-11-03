@@ -5,7 +5,7 @@ using namespace std;
 int T;
 
 int par[10002] = { 0, };
-
+bool visited[10002] = { 0, };
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	cin >> T;
@@ -15,7 +15,10 @@ int main() {
 		int N;
 		cin >> N;
 
-		for (int i = 0; i <= N; i++) par[i] = 0;
+		for (int i = 0; i <= N; i++) {
+			par[i] = 0;
+			visited[i] = 0;
+		}
 
 		for (int i = 0; i < N - 1; i++) {
 			int a, b;
@@ -25,25 +28,22 @@ int main() {
 
 		int a, b;
 		cin >> a >> b;
-		stack<int> s1;
-		stack<int> s2;
 
-		while (a != 0 || b != 0) {
-			if(a != 0) s1.push(a);
-			if(b != 0) s2.push(b);
+		while (a != 0) {
+			visited[a] = 1;
 			a = par[a];
+		}
+
+		int result = 0;
+		while (b != 0) {
+			if (visited[b]) {
+				result = b;
+				break;
+			}
 			b = par[b];
 		}
-		int prev = 0;
-		//cout << "===============================\n";
-		while (!s1.empty() && !s2.empty()) {
-			int n1 = s1.top(); s1.pop();
-			int n2 = s2.top(); s2.pop();
-			//cout << n1 << ", " << n2 << '\n';
-			if (n1 == n2) prev = n1;
-			else break;
-		}
-		cout << prev<<'\n';
+		cout << result<<'\n';
+
 	}
 
 	return 0;
