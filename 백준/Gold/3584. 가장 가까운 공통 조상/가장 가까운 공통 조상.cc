@@ -34,16 +34,13 @@ int main() {
 			a = par[a];
 		}
 
-		int result = 0;
 		while (b != 0) {
 			if (visited[b]) {
-				result = b;
+				cout << b << '\n';
 				break;
 			}
 			b = par[b];
 		}
-		cout << result<<'\n';
-
 	}
 
 	return 0;
