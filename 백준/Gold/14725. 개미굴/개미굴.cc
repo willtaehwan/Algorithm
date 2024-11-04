@@ -15,8 +15,8 @@ struct Node {
 };
 
 int N, M;
-string str[2000];
-vector<int> ch[2000];
+string str[1500];
+vector<int> ch[1500];
 
 void dfs(int now, int dep) {
 
