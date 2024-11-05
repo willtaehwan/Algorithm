@@ -6,16 +6,12 @@ using namespace std;
 
 string T, P;
 int ml, mi = 0;
-
 int arr[MAX] = { 0, };
-
 vector<int> v;
 
 void k_search(int now, int prev) {
-
 	if (P[prev] == P[now - 1]) arr[now] = prev + 1;
 	else if(prev != 0) k_search(now, arr[prev]);
-
 }
 
 int main() {
@@ -25,13 +21,7 @@ int main() {
 	getline(cin, T);
 	getline(cin, P);
 
-	for (int i = 2; i <= P.size(); i++) {
-		k_search(i, arr[i - 1]);
-		//if (P[arr[i - 1]] == P[i - 1]) arr[i] = arr[i - 1] + 1;
-	}
-
-	//for (int i = 0; i <= P.size(); i++) cout << arr[i] << " ";
-	//cout << '\n';
+	for (int i = 2; i <= P.size(); i++) k_search(i, arr[i - 1]);
 
 	int cnt = 0;
 	for (int i = 0; i < T.size(); i++) {
