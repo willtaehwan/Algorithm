@@ -22,19 +22,17 @@ int main() {
 
 		bool zero_flag = true;
 		bool ans_flag = false;
-		int result = 1;
+		int n = 1;
 		for (int i = 0; i <= str.size(); i++) arr[i] = 0;
 		for (int i = 2; i <= str.size(); i++) k_search(i, arr[i - 1]);
 
 		int s = str.size();
-		int a = arr[s];
-		int n = s - a;
+		int p = arr[s]; //A(n - 1)
+		int a = s - p; // 
 		
-		if (n <= a && a%n == 0) result = a / n + 1;
+		if (a <= p && p % a == 0) n = s / a;
 
-		//for (int i = 0; i <= str.size(); i++) cout << arr[i] << " ";
-		//cout << '\n';
-		cout << result << '\n';
+		cout << n << '\n';
 	}
 
 
