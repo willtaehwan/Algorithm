@@ -1,6 +1,4 @@
 #include <iostream>
-#include <queue>
-#include <stack>
 using namespace std;
 
 int T, N, M;
@@ -8,29 +6,6 @@ bool map[501][501] = { 0, };
 int pre_rank[501] = { 0, };
 int arr[501] = { 0, };
 int now_rank[501] = { 0, };
-
-/*
-void rank_search() {
-
-	stack<int> result;
-	queue<int> q;
-
-	for (int i = 1; i <= N; i++) {
-		if (arr[i] == 0) q.push(i);
-	}
-
-	while (!q.empty()) {
-		int now = q.front(); q.pop();
-
-		result.push(now);
-
-		for (int i = 1; i <= N; i++) {
-			if (map[now][i] == 0) continue;
-			if (arr[i] > 1) arr[i]--;
-			else q.push(i);
-		}
-	}
-}*/
 
 void init() {
 	cin >> N;
@@ -56,7 +31,7 @@ void init() {
 }
 
 int main() {
-
+	ios_base::sync_with_stdio(false);
 	cin >> T;
 	for (int tc = 0; tc < T; tc++) {
 
@@ -80,9 +55,6 @@ int main() {
 			}
 		}
 
-
-		//for (int i = 1; i <= N; i++) cout << arr[i] << " ";
-		//cout << '\n';
 		for (int i = 1; i <= N; i++) {
 			int r = arr[i];
 			if (now_rank[r] != -1) {
@@ -92,15 +64,11 @@ int main() {
 			now_rank[r] = i;
 		}
 
-		if (!flag) {
-			//for (int i = N - 1; i >= 0; i--) cout << now_rank[i] << " ";
-			cout << "IMPOSSIBLE\n";
-		}
+		if (!flag) cout << "IMPOSSIBLE\n";
 		else {
 			for (int i = N - 1; i >= 0; i--) cout << now_rank[i]<<" ";
 			cout << '\n';
 		}
-
 	}
 
 	return 0;
