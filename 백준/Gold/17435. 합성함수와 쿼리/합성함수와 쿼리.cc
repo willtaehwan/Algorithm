@@ -11,7 +11,6 @@ struct Node {
 int M, Q;
 
 int ed[200002] = { 0, };
-bool visited[200002] = { 0, };
 int path[200002] = { 0, };
 
 vector<int> v[200002];
@@ -21,6 +20,7 @@ Node nd[200002];
 
 int vcnt = 0;
 int result = 0;
+
 void search_result(int n, int x) {
 
 	int nl = nd[x].a;
@@ -83,18 +83,6 @@ int main() {
 	for (int i = 1; i <= M; i++) {
 		dfs(i, 0);
 	}
-	/*cout << vcnt << "\n";
-	for (int i = 0; i < vcnt; i++) {
-		cout << cycle_v[i] << " _ ";
-		for (int j = 0; j < v[i].size(); j++) {
-			cout << v[i][j] << " ";
-		}
-		cout << '\n';
-	}*/
-
-	//for (int i = 1; i <= M; i++) cout << nd[i].a << " " << nd[i].idx<<'\n';
-
-
 
 	cin >> Q;
 	for (int i = 0; i < Q; i++) {
