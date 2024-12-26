@@ -4,17 +4,17 @@ using namespace std;
 
 struct Node {
 	int to;
-	long long cost;
+	int cost;
 };
 
 int N, M;
 
-vector<Node> v[100020];
-int depth[100020] = { 0, };
-int parent[100020][20] = {0,};
-long long par_cost[100020] = { 0, };
+vector<Node> v[100002];
+int depth[100002] = { 0, };
+int parent[100002][18] = {0,};
+long long par_cost[100002] = { 0, };
 
-int max_dep = 18;
+int max_dep = 17;
 
 int search_k(int a, int b, int lca, int k) {
 
@@ -40,7 +40,6 @@ int search_k(int a, int b, int lca, int k) {
 			ne++;
 			k = k >> 1;
 		}
-
 		return b;
 	}
 	else return lca;
@@ -65,7 +64,6 @@ int search_dep(int a, int b) {
 				a = parent[a][i];
 				b = parent[b][i];
 			}
-
 			lca = parent[b][i];
 		}
 	}
@@ -112,8 +110,6 @@ int main() {
 
 	set_tree(1, 0, 0);
 
-	//for (int i = 1; i <= N; i++) cout << par_cost[i] << " ";
-	//cout << '\n';
 	cin >> M;
 
 	for (int i = 0; i < M; i++) {
@@ -121,10 +117,7 @@ int main() {
 		int k = 0;
 		cin >> num >> a >> b;
 		int lca = search_dep(a, b);
-		if (num == 1) {
-			long long result = par_cost[a] + par_cost[b] - par_cost[lca] - par_cost[lca];
-			cout << result << '\n';
-		}
+		if (num == 1) cout << par_cost[a] + par_cost[b] - (par_cost[lca] * 2) << '\n';
 		else {
 			cin >> k;
 			cout << search_k(a, b, lca, k)<<'\n';
