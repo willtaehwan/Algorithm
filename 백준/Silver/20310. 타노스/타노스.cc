@@ -14,8 +14,22 @@ int main() {
 		else o_cnt++;
 	}
 
-	for (int i = 0; i < z_cnt / 2; i++) cout << 0;
-	for (int i = 0; i < o_cnt / 2; i++) cout << 1;
+	z_cnt /= 2;
+	o_cnt /= 2;
+
+	for (int i = 0; i < str.size(); i++) {
+		if (str[i] == '1') {
+			if (o_cnt > 0) o_cnt--;
+			else cout << 1;
+		}
+		else {
+			if (z_cnt > 0) {
+				cout << 0;
+				z_cnt--;
+			}
+		}
+	}
+
 
 	return 0;
 }
