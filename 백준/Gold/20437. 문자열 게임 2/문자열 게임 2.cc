@@ -19,19 +19,19 @@ int main() {
 			v[now].push_back(i);
 		}
 
-		int min_result = 1e9;
-		int max_result = 0;
+		int mi = 1e5;
+		int ma = 0;
 		for (int i = 0; i < 26; i++) {
 			if (v[i].size() < K) continue;
 			for (int j = 0; j <= v[i].size() - K; j++) {
-				int len = v[i][j + K - 1] - v[i][j] + 1;
-				min_result = min(min_result, len);
-				max_result = max(max_result, len);
+				int l = v[i][j + K - 1] - v[i][j] + 1;
+				mi = min(mi, l);
+				ma = max(ma, l);
 			}
 		}
 
-		if (max_result == 0) cout << -1 << '\n';
-		else cout << min_result << " " << max_result << '\n';
+		if (ma == 0) cout << -1 << '\n';
+		else cout << mi << " " << ma << '\n';
 	}
 
 	return 0;
