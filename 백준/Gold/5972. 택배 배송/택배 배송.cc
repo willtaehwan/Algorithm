@@ -6,6 +6,11 @@ using namespace std;
 struct Node {
 	int to;
 	int cost;
+
+	bool operator<(Node right) const {
+		if (cost > right.cost) return true;
+		return false;
+	}
 };
 
 int N, M;
@@ -17,15 +22,15 @@ int bfs() {
 
 	for (int i = 0; i <= N; i++) map[i] = 1e9;
 
-	queue<Node> q;
+	priority_queue<Node> q;
 	q.push({ 1, 0 });
 	map[1] = 0;
 
 	while (!q.empty()) {
-		Node now = q.front(); q.pop();
+		Node now = q.top(); q.pop();
 
 		if (now.cost > map[now.to]) continue;
-		if (now.cost > map[N]) continue;
+		//if (now.cost > map[N]) continue;
 
 		for (int i = 0; i < v[now.to].size(); i++) {
 			Node next = v[now.to][i];
