@@ -3,36 +3,24 @@
 using namespace std;
 
 int N;
+char temp[10];
 
-void print_eq(int bit) {
-
-	int temp[10] = { 0, };
-	for (int i = N-2; i >= 0; i--) {
-		int n = bit % 3;
-		temp[i] = n;
-		bit /= 3;
-	}
-
-	for (int i = 1; i < N; i++) {
-		cout << i;
-		if (temp[i - 1] == 0) cout << "+";
-		else if (temp[i - 1] == 1) cout << "-";
-		else cout << " ";
-	}
-	cout << N<<'\n';
-
-}
-
-void ans(int now, int res, int str, int flag, int bit) {
+void ans(int now, int res, int str, int flag) {
 
 	if (now >= N) {
 		res += (str * flag);
-		if (res == 0) print_eq(bit);
+		if (res == 0) {
+			for (int i = 1; i < N; i++) cout << i << temp[i - 1];
+			cout << N << '\n';
+		}
 		return;
 	}
-	ans(now + 1, res, str * 10 + now + 1, flag, bit * 3 + 2); // " "
-	ans(now + 1, res + (str * flag), now + 1, 1, bit*3);      // "+"
-	ans(now + 1, res + (str * flag), now + 1, -1, bit*3 + 1); // "-"
+	temp[now - 1] = ' ';
+	ans(now + 1, res, str * 10 + now + 1, flag); // " "
+	temp[now - 1] = '+';
+	ans(now + 1, res + (str * flag), now + 1, 1);      // "+"
+	temp[now - 1] = '-';
+	ans(now + 1, res + (str * flag), now + 1, -1); // "-"
 }
 
 int main() {
@@ -41,8 +29,8 @@ int main() {
 	int T;
 	cin >> T;
 	for (int tc = 0; tc < T; tc++) {
-		cin >> N;		
-		ans(1, 0, 1, 1, 0);
+		cin >> N;
+		ans(1, 0, 1, 1);
 		cout << '\n';
 	}
 
