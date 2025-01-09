@@ -7,7 +7,7 @@ struct Node {
 	int lr;
 	int h;
 	int idx;
-	
+
 	bool operator<(Node right) const {
 		if (x > right.x) return true;
 		else if (x < right.x) return false;
@@ -17,12 +17,7 @@ struct Node {
 
 		if (h < right.h) return true;
 		return false;
-		//else if (h > right.h) return false;
-
-		//if (idx > right.idx) return true;
-		//else return false;
 	}
-
 };
 
 struct Node2 {
@@ -52,17 +47,16 @@ int main() {
 		q.push({ r,0, h, i });
 	}
 
-	q2.push({0, 0, 0 });
+	q2.push({ 0, 0, 0 });
 	checked[0] = true;
 	int max_h = 0;
 	int max_idx = 0;
 
 	while (!q.empty()) {
 		Node now = q.top(); q.pop();
-		bool flag = true;
+
 		if (checked[now.idx]) {
 			checked[now.idx] = false;
-			flag = false;
 			if (max_idx == now.idx) {
 				q2.pop();
 				bool ch_flag = true;
@@ -74,7 +68,7 @@ int main() {
 				if (q.top().x == now.x) {
 					while (!q.empty()) {
 						Node ne = q.top();
-						
+
 						if (ne.x == now.x) {
 							if (checked[ne.idx]) {
 								checked[ne.idx] = false;
@@ -98,7 +92,7 @@ int main() {
 						else break;
 					}
 				}
-				
+
 
 				if (!ch_flag) continue;
 
@@ -113,11 +107,10 @@ int main() {
 					else q2.pop();
 				}
 			}
+			continue;
 		}
 
-		if (!flag) continue;
-
-		q2.push({now.x, now.h, now.idx });
+		q2.push({ now.x, now.h, now.idx });
 		checked[now.idx] = true;
 
 		if (max_h < now.h) {
