@@ -4,7 +4,7 @@ using namespace std;
 
 struct Node {
 	int x;
-	int lr;
+	bool lr;
 	int h;
 	int idx;
 
@@ -21,7 +21,6 @@ struct Node {
 };
 
 struct Node2 {
-	int x;
 	int h;
 	int idx;
 
@@ -47,7 +46,7 @@ int main() {
 		q.push({ r,0, h, i });
 	}
 
-	q2.push({ 0, 0, 0 });
+	q2.push({ 0, 0 });
 	checked[0] = true;
 	int max_h = 0;
 	int max_idx = 0;
@@ -110,7 +109,7 @@ int main() {
 			continue;
 		}
 
-		q2.push({ now.x, now.h, now.idx });
+		q2.push({ now.h, now.idx });
 		checked[now.idx] = true;
 
 		if (max_h < now.h) {
