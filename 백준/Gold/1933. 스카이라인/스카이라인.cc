@@ -16,10 +16,11 @@ struct Node {
 		else if (lr < right.lr) return false;
 
 		if (h < right.h) return true;
-		else if (h > right.h) return false;
+		return false;
+		//else if (h > right.h) return false;
 
-		if (idx > right.idx) return true;
-		else return false;
+		//if (idx > right.idx) return true;
+		//else return false;
 	}
 
 };
@@ -58,14 +59,11 @@ int main() {
 
 	while (!q.empty()) {
 		Node now = q.top(); q.pop();
-		//cout << now.x << "\n";
 		bool flag = true;
 		if (checked[now.idx]) {
 			checked[now.idx] = false;
 			flag = false;
-			//cout << now.idx << "  OFF \n";
 			if (max_idx == now.idx) {
-				//cout <<"SAME H : " << now.x << "\n";
 				q2.pop();
 				bool ch_flag = true;
 
@@ -73,9 +71,7 @@ int main() {
 					cout << now.x << " " << 0;
 					continue;
 				}
-				//cout<<"QTOP = " << q.top().idx << '\n';
 				if (q.top().x == now.x) {
-					//cout << "same x : " << q.top().x << " \n";
 					while (!q.empty()) {
 						Node ne = q.top();
 						
@@ -108,7 +104,6 @@ int main() {
 
 				while (!q2.empty()) {
 					Node2 next = q2.top();
-					//cout << "   NEXT : " << next.x << " " << next.h << " "<<checked[next.idx] << '\n';
 					if (checked[next.idx]) {
 						max_h = next.h;
 						max_idx = next.idx;
@@ -124,7 +119,7 @@ int main() {
 
 		q2.push({now.x, now.h, now.idx });
 		checked[now.idx] = true;
-		//cout << now.idx << "  ON \n";
+
 		if (max_h < now.h) {
 			max_h = now.h;
 			max_idx = now.idx;
