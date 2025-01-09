@@ -57,7 +57,6 @@ int main() {
 		if (checked[now.idx]) {
 			checked[now.idx] = false;
 			if (max_idx == now.idx) {
-				q2.pop();
 				bool ch_flag = true;
 
 				if (q.empty()) {
