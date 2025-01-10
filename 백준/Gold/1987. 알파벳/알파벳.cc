@@ -5,11 +5,15 @@ using namespace std;
 int N, M;
 
 int map[21][21];
+int visited[21][21] = { 0, };
 int dr[] = { -1,1,0,0 };
 int dc[] = { 0,0,-1,1 };
 
 int max_result = 1;
 void dfs(int row, int col, int cnt, int bit) {
+
+	if (visited[row][col] == bit) return;
+	visited[row][col] = bit;
 
 	for (int i = 0; i < 4; i++) {
 		int ner = row + dr[i];
