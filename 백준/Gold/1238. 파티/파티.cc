@@ -6,12 +6,6 @@ using namespace std;
 struct Edge {
 	int to;
 	int cost;
-
-	bool operator<(Edge right) const {
-		if (cost < right.cost) return true;
-		return false;
-	}
-
 };
 
 int N, M, X;
@@ -43,7 +37,7 @@ void dk(int st) {
 	}
 
 	tox[st] = visited[X];
-	
+
 	if (st == X) {
 		for (int i = 1; i <= N; i++) xto[i] = visited[i];
 	}
@@ -62,17 +56,8 @@ int main() {
 	}
 
 	for (int i = 1; i <= N; i++) dk(i);
-	
-	int ans = 0;
 
-	/*for (int i = 1; i <= N; i++) {
-		cout << tox[i] << " ";
-	}
-	cout << '\n';
-	for (int i = 1; i <= N; i++) {
-		cout << xto[i] << " ";
-	}
-	cout << '\n';*/
+	int ans = 0;
 	for (int i = 1; i <= N; i++) ans = max(ans, tox[i] + xto[i]);
 	cout << ans;
 
