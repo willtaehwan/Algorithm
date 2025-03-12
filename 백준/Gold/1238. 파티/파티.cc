@@ -9,26 +9,24 @@ struct Edge {
 };
 
 int N, M, X;
-int tox[1001] = { 0, };
-int xto[1001] = { 0, };
-int visited[1001] = { 0, };
-vector<Edge> v[1001];
+vector<Edge> gov[1001];
+vector<Edge> rev[1001];
 
-void dk(int st) {
-
+int* dk(vector<Edge> (*v)[1001]) {
+	int* visited = new int[N+1];
 	for (int i = 0; i <= N; i++) visited[i] = 1e9;
 
 	queue<Edge> q;
-	q.push({ st, 0 });
-	visited[st] = 0;
+	q.push({ X, 0 });
+	visited[X] = 0;
 
 	while (!q.empty()) {
 		Edge now = q.front(); q.pop();
 
 		if (now.cost > visited[now.to]) continue;
 
-		for (int i = 0; i < v[now.to].size(); i++) {
-			Edge next = v[now.to][i];
+		for (int i = 0; i < (*v)[now.to].size(); i++) {
+			Edge next = (*v)[now.to][i];
 			int nc = now.cost + next.cost;
 			if (visited[next.to] <= nc) continue;
 			visited[next.to] = nc;
@@ -36,13 +34,7 @@ void dk(int st) {
 		}
 	}
 
-	tox[st] = visited[X];
-
-	if (st == X) {
-		for (int i = 1; i <= N; i++) xto[i] = visited[i];
-	}
-
-	return;
+	return visited;
 }
 
 int main() {
@@ -52,10 +44,12 @@ int main() {
 	for (int i = 0; i < M; i++) {
 		int a, b, c;
 		cin >> a >> b >> c;
-		v[a].push_back({ b,c });
+		gov[a].push_back({ b,c });
+		rev[b].push_back({ a,c });
 	}
-
-	for (int i = 1; i <= N; i++) dk(i);
+	
+	int* tox = dk(&gov);
+	int* xto = dk(&rev);
 
 	int ans = 0;
 	for (int i = 1; i <= N; i++) ans = max(ans, tox[i] + xto[i]);
