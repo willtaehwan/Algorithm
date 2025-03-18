@@ -6,7 +6,7 @@ using namespace std;
 
 int N, M, H;
 
-int DP[52][1010] = { 0, };
+int DP[2][1010] = { 0, };
 int arr[52][11] = { 0, };
 
 int main() {
@@ -32,17 +32,19 @@ int main() {
 	DP[0][0] = 1;
 
 	for (int i = 1; i <= N; i++) {
+		int n = i % 2;
+		for (int j = 0; j <= H; j++) DP[n][j] = 0;
 		for (int j = 0; j <= M; j++) {
 			int nb = arr[i][j];
 			if (nb == -1) break;
 			for (int k = 0; k <= H; k++) {
 				if (k + nb > H) break;
-				DP[i][k + nb] = (DP[i][k + nb] + DP[i - 1][k]) % 10007;
+				DP[n][k + nb] = (DP[n][k + nb] + DP[!n][k]) % 10007;
 			}
 		}
 	}
 
-	cout << DP[N][H];
-
+	cout << DP[N%2][H];
+	
 	return 0;
 }
