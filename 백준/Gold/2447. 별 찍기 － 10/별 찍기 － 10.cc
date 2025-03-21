@@ -6,7 +6,7 @@ int N;
 
 int dr[] = { -1,-1,-1,0,0,0,1,1,1 };
 int dc[] = { -1,0,1,-1,0,1,-1,0,1 };
-bool map[6562][6562] = { 0, };
+bool map[2188][2188] = { 0, };
 
 
 void rec(int size, int row, int col, bool cent) {
