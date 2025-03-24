@@ -6,7 +6,6 @@ int N;
 int arr[100002] = { 0, };
 bool check[100002] = { 0, };
 int visited[100002] = { 0, };
-int path[100002] = { 0, };
 int ans = 0;
 
 void dfs(int now, int cnt) {
