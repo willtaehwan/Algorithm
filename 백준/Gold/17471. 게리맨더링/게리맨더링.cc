@@ -9,7 +9,7 @@ int pe[11] = { 0, };
 int N;
 int visited[11] = { 0, };
 
-bool bfs(int a, bool d) {
+int bfs(int a, bool d) {
 
 	for (int i = 1; i <= N; i++) visited[i] = -1;
 
@@ -38,12 +38,13 @@ bool bfs(int a, bool d) {
 		}
 	}
 
-	bool flag = true;
+	int sum = 0;
 	for (int i = 1; i <= N; i++) {
-		if (visited[i] == 0) flag = false;
+		if (visited[i] == 0) return 1e9;
+		else if (visited[i] == 1) sum += pe[i];
 	}
 
-	return flag;
+	return sum;
 }
 
 int main() {
@@ -66,21 +67,16 @@ int main() {
 
 	for (int i = 0; i < N; i++) n *= 2;
 	
-	int min_result = 1e9;
+	int mr = 1e9;
 	for (int i = 1; i < n-1; i++) {
-		if (bfs(i, 0) && bfs(i, 1)) {
-			int gA = 0, gB = 0;
-			int tmp = i;
-			for (int j = 1; j <= N; j++) {
-				if ((tmp & 1) == true) gA += pe[j];
-				else gB += pe[j];
-				tmp /= 2;
-			}
-			min_result = min(min_result, abs(gA - gB));
-		}
+		int A = bfs(i, 0);
+		int B = bfs(i, 1);
+		if (A + B >= 1e9) continue;
+		mr = min(mr, abs(A - B));
 	}
-	if (min_result == 1e9) cout << -1;
-	else cout << min_result;
+
+	if (mr == 1e9) cout << -1;
+	else cout << mr;
 
 	return 0;
 }
