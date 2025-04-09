@@ -1,19 +1,10 @@
 #include <iostream>
-#include <queue>
+#include <deque>
 using namespace std;
 
 struct Node {
 	int idx;
 	int val;
-
-	bool operator<(Node right) const {
-		if (val > right.val) return true;
-		if (val < right.val) return false;
-
-		if (idx > right.idx) return true;
-		return false;
-	}
-
 };
 
 int N, L;
@@ -22,24 +13,21 @@ int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	cin >> N >> L;
 
-	priority_queue<Node> pq;
+	deque<Node> dq;
 
 	for (int i = 0; i < N; i++) {
 		int a;
 		cin >> a;
-		pq.push({ i, a });
 
-		while (1) {
-			Node now = pq.top();
-
-			if (now.idx <= i - L) pq.pop();
-			else {
-				cout << now.val << " ";
-				break;
-			}
+		while (!dq.empty()) {
+			if (dq.back().val > a) dq.pop_back();
+			else break;
 		}
-	}
 
+		dq.push_back({ i,a });
+		if (dq.front().idx <= i - L) dq.pop_front();
+		cout << dq.front().val << " ";
+	}
 
 	return 0;
 }
