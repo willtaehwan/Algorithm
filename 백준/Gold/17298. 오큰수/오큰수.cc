@@ -1,15 +1,10 @@
 #include <iostream>
-#include <queue>
+#include <stack>
 using namespace std;
 
 struct Node {
 	int idx;
 	int val;
-
-	bool operator<(Node right) const {
-		if (val > right.val) return true;
-		return false;
-	}
 };
 
 int N;
@@ -20,24 +15,25 @@ int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	cin >> N;
 
-	priority_queue<Node> q;
+	stack<Node> s;
 
 	for (int i = 0; i < N; i++) {
 		int a;
 		cin >> a;
 		arr[i] = -1;
 
-		while (!q.empty()) {
-			Node now = q.top(); 
+		while (!s.empty()) {
+			Node now = s.top();
 
 			if (now.val < a) {
 				arr[now.idx] = a;
-				q.pop();
+				s.pop();
 			}
 			else break;
 		}
 
-		q.push({ i,a });
+		s.push({ i,a });
+		
 	}
 
 	for (int i = 0; i < N; i++) cout << arr[i] << " ";
