@@ -10,8 +10,6 @@ struct Node {
 int N;
 vector<Node> v;
 
-Node arr[1000002];
-
 void search_bi(int now, int idx) {
 
 	int left = 1;
@@ -25,7 +23,6 @@ void search_bi(int now, int idx) {
 		mid = (left + right) / 2;
 	}
 	v[mid] = { now, idx };
-	arr[idx].idx = v[mid - 1].idx;
 }
 
 int main() {
@@ -37,12 +34,10 @@ int main() {
 	for (int i = 1; i <= N; i++) {
 		int now;
 		cin >> now;
-		arr[i].num = now;
 
 		if (v[end].num > now) search_bi(now, i);
 		if (v[end].num < now) {
 			v.push_back({ now, i });
-			arr[i].idx = v[end].idx;
 			end++;
 		}
 	}
