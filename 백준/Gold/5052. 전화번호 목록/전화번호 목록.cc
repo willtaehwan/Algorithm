@@ -26,7 +26,7 @@ int main() {
 
 		bool flag = true;
 
-		for (int i = 0; i < N; i++) {
+		for (int i = 0; i < N && flag; i++) {
 			string now = v[i];
 			
 			while (now != "") {
