@@ -8,6 +8,7 @@ bool visited[2001] = { 0, };
 bool flag = false;
 
 void dfs(int now, int cnt) {
+
 	if (flag) return;
 	
 	if (cnt == 5) {
@@ -19,9 +20,9 @@ void dfs(int now, int cnt) {
 		int next = v[now][i];
 
 		if (visited[next]) continue;
-		visited[next] = true;
+		visited[now] = true;
 		dfs(next, cnt + 1);
-		visited[next] = false;
+		visited[now] = false;
 	}
 }
 
@@ -36,14 +37,9 @@ int main() {
 		v[b].push_back(a);
 	}
 
-	for (int i = 0; i < N; i++) {
-		visited[i] = true;
-		dfs(i, 1);
-		visited[i] = false;
-	}
+	for (int i = 0; i < N; i++) dfs(i, 1);
 
-	if (flag) cout << 1;
-	else cout << 0;
+	cout << flag;
 
 	return 0;
 }
