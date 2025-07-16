@@ -5,38 +5,16 @@ using namespace std;
 
 ll N;
 bool arr[10];
-bool c = true;
 
 bool check_num(ll n) {
 
-	bool flag = true;
+	bool flag = false;
 	for (ll i = 1; i < 10; i++) {
 		if (!arr[i]) continue;
-		if (n % i != 0) flag = false;
+		if (n % i != 0) flag = true;
 	}
 
 	return flag;
-}
-
-
-void bfs(ll st) {
-
-	queue<ll> q;
-	q.push(st);
-
-	while (c) {
-		ll now = q.front(); q.pop();
-		for (ll i = 0; i < 10; i++) {
-			ll t = now + i;
-			if (check_num(t)) {
-				cout << t;
-				c = false;
-				break;
-			}
-			q.push(t * 10);
-		}
-		
-	}
 }
 
 int main() {
@@ -49,12 +27,20 @@ int main() {
 		temp /= 10;
 	}
 
-	if (check_num(N)) {
-		cout << N;
-		return 0;
-	}
+	temp = N;
+	int k = 10;
+	int b = 0;
 
-	bfs(N * 10);
+	while (check_num(temp)) {
+		temp = N * k + b;
+		b++;
+		if (b == k) {
+			k *= 10;
+			b = 0;
+		}
+	}
+	
+	cout << temp;
 
 	return 0;
 }
