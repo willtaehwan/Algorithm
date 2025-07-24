@@ -1,58 +1,57 @@
 #include <iostream>
-#include <queue>
 using namespace std;
-
-struct Node {
-	int row;
-	int col;
-};
 
 int N, Q;
 
-int dr[] = { -1,-1,-1,0,0,1,1,1 };
-int dc[] = { -1,0,1,-1,1,-1,0,1 };
+int arr[5005][5005] = { 0, };
 
-int visited[5002][5002];
+int bi_search(int row, int col) {
 
-queue<Node> q;
+	int l = 0;
+	int r = 5000;
+
+	while (l < r) {
+		int mid = (l + r) / 2;
+
+		int br = (row - mid) < 1 ? 1 : (row - mid);
+		int bc = (col - mid) < 1 ? 1 : (col - mid);
+		int tr = (row + mid) > 5000 ? 5001 : (row + mid);
+		int tc = (col + mid) > 5000 ? 5001 : (col + mid);
+
+		int now = arr[tr][tc] - arr[br - 1][tc] - arr[tr][bc - 1] + arr[br - 1][bc - 1];
+
+		if (now > 0) r = mid;
+		else l = mid + 1;
+	}
+
+	return l;
+}
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
-	for (int i = 0; i < 5002; i++) {
-		for (int j = 0; j < 5002; j++) {
-			visited[i][j] = -1;
-		}
-	}
-
 	cin >> N >> Q;
+
+	int mr = 0;
+	int mc = 0;
 	for (int i = 0; i < N; i++) {
-		int a, b;
-		cin >> a >> b;
-		q.push({ a, b });
-		visited[a][b] = 0;
+		int r, c;
+		cin >> r >> c;
+		arr[r+1][c+1] = 1;
+		mr = max(mr, r+1);
+		mc = max(mc, c+1);
 	}
 
-	while (!q.empty()) {
-		Node now = q.front(); q.pop();
-
-		for (int i = 0; i < 8; i++) {
-			int ner = now.row + dr[i];
-			int nec = now.col + dc[i];
-			if (ner < 0 || nec < 0 || ner >= 5001 || nec >= 5001) continue;
-			if (visited[ner][nec] != -1) continue;
-
-			visited[ner][nec] = visited[now.row][now.col] + 1;
-
-			q.push({ ner,nec});
+	for (int i = 1; i <= 5001; i++) {
+		for (int j = 1; j <= 5001; j++) {
+			arr[i][j] += arr[i - 1][j] + arr[i][j - 1] - arr[i - 1][j - 1];
 		}
 	}
-
 
 	for (int i = 0; i < Q; i++) {
-		int a, b;
-		cin >> a >> b;
-		cout << visited[a][b] << "\n";
+		int r, c;
+		cin >> r >> c;
+		cout << bi_search(r + 1, c + 1)<<'\n';
 	}
 
 	return 0;
