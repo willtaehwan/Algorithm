@@ -3,7 +3,6 @@
 using namespace std;
 
 int inp[501] = { 0, };
-int map[501][501];
 bool arr[100001] = { 0, };
 
 int N;
@@ -23,9 +22,9 @@ int main() {
 		for (int j = i+1; j < N; j++) {
 			int a = inp[i];
 			int m = inp[j] - a;
-			map[i][j] = 2;
-			while (arr[a+m*map[i][j]]) map[i][j]++;
-			ans = max(ans, map[i][j]);
+			int cnt = 2;
+			while (arr[a+m*cnt]) cnt++;
+			ans = max(ans, cnt);
 		}
 	}
 
